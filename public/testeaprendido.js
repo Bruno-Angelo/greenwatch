@@ -27,8 +27,12 @@ function onConnect() {
     console.log('Conectado ao broker '+host+":"+port);
     //topic = document.getElementById("topic").value;
     topic = "bananaOmastar";
+    var joinmessage = new Paho.Message(username+" entrou no chat");
+    joinmessage.destinationName = "bananaOmastar";
+    client.send(joinmessage);
     client.subscribe(topic);
     document.getElementById("messages").innerHTML += "<span> Você está inscrito no Tópico " + topic + "<span><br>";
+    
 }
 
 function onConnectionLost(responseObject) {
