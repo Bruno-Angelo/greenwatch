@@ -2,12 +2,12 @@ function startConnect() {
 
     clientID = "clientID - "+parseInt(Math.random() * 100);
    
-    host = "broker.emqx.io"
-    port = "8083"
+    host = "wss://broker.emqx.io/mqtt"
+    port = "8084"
     username = document.getElementById("username").value;
     console.log("Host: "+host);
     console.log("Porta: "+port);
-    client = new Paho.Client(host,Number(port), clientID);
+    client = new Paho.Client("wss://broker.emqx.io:8084/mqtt", clientID);
 
 
     client.onConnectionLost = onConnectionLost;
