@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GreenWatch</title>
+    <link rel="stylesheet" href="/sitenpx/src/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.min.js" type="text/javascript"></script>
+    <script src="./testeaprendido.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div class="wrapper">
+      <form>
+        <p>Digite seu nome e conecte-se ao Broker</p>
+        <input id="username" type="text" placeholder="Digite seu nome!">
+        <input type="button" onclick="startConnect()" value="Conectar">
+        
+        <br>
+        
+        <p>Publique uma mensagem</p>
+        <input id="mensagem" type="text" placeholder="Digite qualquer coisa..." >
+        <input type="button" onclick="pubMensagem()" value="Publicar">
+      </form>
+      <div id="messages"></div>
+    </div>
+    <script src="./src/index.js" type="text/jsx" ></script>
+
+  </body>
+</html>
