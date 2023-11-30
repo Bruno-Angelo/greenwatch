@@ -3,25 +3,49 @@
   <head>
     <meta charset="utf-8">
     <title>GreenWatch</title>
-    <link rel="stylesheet" href="/sitenpx/src/styles.css">
+    <link rel="stylesheet" href="/src/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.min.js" type="text/javascript"></script>
     <script src="./testeaprendido.js" type="text/javascript"></script>
   </head>
-  <body>
+  <body onload="startConnect()">
+    
     <div id="root"></div>
-    <div class="wrapper">
+    <div> 
+      <table border="1">
+        <caption>Marcinho</caption>
+        <thead>
+            <tr>
+                <th>Temperatura do ar</th>
+                <th>Umidade do ar</th>
+                <th>Umidade do solo</th>
+            </tr>
+        </thead>
+        <tbody id="banquinho">
+          <tr id="rowMarcinho">
+            <td id="tempAr">...</td>
+            <td id="umiAr">...</td>
+            <td id="umiSolo">...</td>
+        </tr>
+        </tbody>
+    </table>
+
+    </div>
+    <!-- <div class="wrapper">
       <form>
-        <p>Digite seu nome e conecte-se ao Broker</p>
-        <input id="username" type="text" placeholder="Digite seu nome!">
-        <input type="button" onclick="startConnect()" value="Conectar">
-        
-        <br>
-        
+
         <p>Publique uma mensagem</p>
-        <input id="mensagem" type="text" placeholder="Digite qualquer coisa..." >
-        <input type="button" onclick="pubMensagem()" value="Publicar">
+        <input id="pubTemperaturaAr" type="text" placeholder="28" >
+        <input type="button" onclick="pubTemperaturaAr()" value="Temperatura do Ar">
+        <br>
+        <input id="pubUmidadeAr" type="text" placeholder="28" >
+        <input type="button" onclick="pubUmidadeAr()" value="Umidade do Ar">
+        <br>
+        <input id="pubUmidadeSolo" type="text" placeholder="True/False" >
+        <input type="button" onclick="pubUmidadeSolo()" value="Umidade do Solo">
+
       </form>
-      <div id="messages"></div>
+      -->
+      
     </div>
     <script src="./src/index.js" type="text/jsx" ></script>
 

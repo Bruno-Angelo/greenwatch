@@ -4,7 +4,7 @@ function startConnect() {
    
     host = "wss://broker.emqx.io/mqtt"
     port = "8084"
-    username = document.getElementById("username").value;
+    username = "Alguém"
     console.log("Host: "+host);
     console.log("Porta: "+port);
     client = new Paho.Client("wss://broker.emqx.io:8084/mqtt", clientID);
@@ -21,17 +21,16 @@ function startConnect() {
 }
 
 function onConnect() {
-    document.getElementById("messages").innerHTML += "<span> Conectado ao Broker '" + host + "', com a porta " + port + "<span><br>"; 
-    document.getElementById("messages").innerHTML += "<span> Seu ID gerado é: '" + clientID + "' e seu nome de usuário é '" + username + "'<span><br>"; 
+    // document.getElementById("messages").innerHTML += "<span> Conectado ao Broker '" + host + "', com a porta " + port + "<span><br>"; 
+    // document.getElementById("messages").innerHTML += "<span> Seu ID gerado é: '" + clientID + "' e seu nome de usuário é '" + username + "'<span><br>"; 
 
     console.log('Conectado ao broker '+host+":"+port);
     //topic = document.getElementById("topic").value;
     topic = "bananaOmastar";
-    var joinmessage = new Paho.Message(username+" entrou no chat");
-    joinmessage.destinationName = "bananaOmastar";
-    client.send(joinmessage);
+    // var joinmessage = new Paho.Message(username+" entrou no chat");
+    // joinmessage.destinationName = "bananaOmastar";
+    // client.send(joinmessage);
     client.subscribe(topic);
-    document.getElementById("messages").innerHTML += "<span> Você está inscrito no Tópico " + topic + "<span><br>";
     
 }
 
@@ -43,18 +42,40 @@ function onConnectionLost(responseObject) {
 
 function onMessageArrived(message) {
     
-    console.log();
-    document.getElementById("messages").innerHTML += "<span>" + "[Tópico - "+ topic + "] " + message.payloadString + "<span><br>";
+    console.log(message.payloadString);
+    //document.getElementById("messages").innerHTML += "<span>" + "[Tópico - "+ topic + "] " + message.payloadString + "<span><br>";
+    if (message.payloadString.slice(0,3) === "ART") {
+        console.log("if resolvido - " + message.payloadString)
+        document.getElementById("tempAr").innerHTML = message.payloadString.slice(3);
+    } else if (message.payloadString.slice(0,3) === "ARU") {
+        console.log("if resolvido - " + message.payloadString)
+        document.getElementById("umiAr").innerHTML = message.payloadString.slice(3);
+    } else if (message.payloadString.slice(0,3) === "SOU") {
+        console.log("if resolvido - " + message.payloadString)
+        document.getElementById("umiSolo").innerHTML = message.payloadString.slice(3);
+    }
 }
 
-function pubMensagem() {
+function pubTemperaturaAr() {
+    //var message = new Paho.Message(document.getElementById("mensagem").value);
+    var message = new Paho.Message("TAR"+document.getElementById("pubTemperaturaAr").value);
+    message.destinationName = "bananaOmastar";
+    client.send(message);
+}
+
+function pubUmidadeAr() {
     //var message = new Paho.Message(document.getElementById("mensagem").value);
     var message = new Paho.Message(username+": "+document.getElementById("mensagem").value);
     message.destinationName = "bananaOmastar";
     client.send(message);
 }
 
-
+function pubUmidadeSolo() {
+    //var message = new Paho.Message(document.getElementById("mensagem").value);
+    var message = new Paho.Message(username+": "+document.getElementById("mensagem").value);
+    message.destinationName = "bananaOmastar";
+    client.send(message);
+}
 
 /*function startConnect() {
 
